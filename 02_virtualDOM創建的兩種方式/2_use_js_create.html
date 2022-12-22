@@ -20,7 +20,12 @@
     <script type="text/javascript">
       // 1. create virtual DOM
       // ReactDOM.createElement(標籤名, 標籤屬性, 標籤內容);
-      const VDOM = React.createElement("h1", { id: "title" }, "Hello! React");
+      // 一直包一直包很痛苦
+      const VDOM = React.createElement(
+        "h1",
+        { id: "title" },
+        React.createElement("span", {}, "Hello! React")
+      );
       // 2. render virtual DOM to html
       ReactDOM.render(VDOM, document.getElementById("test"));
     </script>

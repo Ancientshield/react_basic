@@ -22,7 +22,12 @@
     <!-- 此處一定要寫 babel  -->
     <script type="text/babel">
       // 1. create virtual DOM，此處一定不要用雙引號，因為不是字串
-      const VDOM = <h1 id="title">Hello! React</h1>;
+      // 2. 有了jsx可以更方便創建 virtual DOM
+      const VDOM = (
+        <h1 id="title">
+          <span>Hello! React</span>
+        </h1>
+      );
       // 2. render virtual DOM to html
       ReactDOM.render(VDOM, document.getElementById("test"));
     </script>
