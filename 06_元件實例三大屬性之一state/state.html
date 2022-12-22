@@ -21,52 +21,30 @@
 
     <!-- 此處一定要寫 babel  -->
     <script type="text/babel">
-      // 1. 建立元件
+      // 1. 創建元件
       class Weather extends React.Component {
+        // 2. 為了改變 state，初始化元件狀態
         constructor(props) {
           super(props);
-          this.state = { isHot: ture };
+
+          this.state = { isHot: false };
         }
         render() {
+          /*
+          尚未於 constructor 中指定 this.state 的值時，預設為 null
+          console.log(this); // 印出null
+          debugger;
+          */
+          /* 原本寫法
+          return <h1>今天天氣很{ this.state.isHot ? "炎熱" : "涼爽"}</h1>; 
+          */
+          /* 解構賦值 */
           const { isHot } = this.state;
           return <h1>今天天氣很{isHot ? "炎熱" : "涼爽"}</h1>;
         }
       }
+      // render component to html
       ReactDOM.render(<Weather />, document.getElementById("test"));
-      /*
-           1. React 解析元件標籤，找到了 MyComponent 元件。
-           2. 發現元件使用 class 定義後，即 new 一個該 class 的 instance，透過該 instance，呼叫原型上 render() 方法。
-           3. 將 render() return 的虛擬 DOM 為真實 DOM，呈現在頁面中。
-      */
-
-      /* jsx語法規則：
-           1. 定義虛擬 DOM 時，不要寫引號
-           2. 標籤中混入 js 表達式時，要用 {}
-           3. style 不能用 class 指定，要用 className
-           4. inline sytyle 要用 style={{ key:value, key:value }}
-           5. 虛擬 DOM 只能有一個根標籤
-           6. 每個虛擬 DOM 標籤都必須 closure，沒有 closure 的標籤可加 /
-           7. 標籤字母若小寫開頭，則將該標籤轉為 html 中同名元素，若 html 中無該標籤對應的同名元素，則報錯
-           8. 標籤字母若大寫開頭，React 去渲染對應的 Component，若沒有對應的 Component，則報錯
-         */
-      /* 關於虛擬 DOM：
-            1. 本質是 Object
-            2. 虛擬 DOM 屬性較少，比較小，真實 DOM 較大，因為虛擬 DOM 是 React 在用，無需真實 DOM 那麼多屬性
-            3. 虛擬 DOM 最終會被 React 轉化為真實 DOM，呈現在頁面上
-      */
-      /* 一定要區分【js表達式】與【js語句】
-          表達式（Expression），語句（Statement）
-      		  1. 表達式：一個表達式會產生一個值，可以放在任何一個需要值的地方
-      				(1) a
-      				(2) a + b
-      				(3) demo(1)
-      				(4) array.map()
-      				(5) function test(){}
-      		  2. js語句：
-      				(1) if(){}
-      				(2) for(){}
-      				(3) switch(){ case:xxxx }
-      */
     </script>
   </body>
 </html>
