@@ -10,11 +10,11 @@
     <script type="text/javascript">
       class Person {
         constructor(name, age) {
-          //constructor 中的 this 是指向用 class 創建的 instance
+          //constructor 中的 this 是指向用 class 建立的 instance
           this.name = name;
           this.age = age;
         }
-        // method 中的 function，this 是 class 創建後的 instance 指向的 method
+        // method 中的 function，this 是 class 建立後的 instance 指向的 method
         // 透過 Person instance 呼叫 speek() 時，speak() 中的 this 就是 Person instance
         speak() {
           console.log(`我叫${this.name}，我的年齡是${this.age}`);
@@ -32,9 +32,21 @@
           super(name, age);
           this.grade = grade;
         }
+        // 重寫父類別繼承過來的方法(method)
+        speak() {
+          console.log(
+            `我叫${this.name}，我的年齡是${this.age}，我讀的是${this.grade}`
+          );
+        }
+        // 透過 Student instance 呼叫 study() 時， study() 中的 this 就是 Student instance
+        study() {
+          console.log("我很努力地學習。");
+        }
       }
       const s1 = new Student("小張", 15, "高一");
       console.log(s1);
+      s1.speak();
+      s1.study();
     </script>
   </body>
 </html>

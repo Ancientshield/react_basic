@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>函數式元件</title>
+    <title>Class Component</title>
   </head>
   <body>
     <!-- 準備容器，一定要記得寫容器 -->
@@ -21,17 +21,22 @@
 
     <!-- 此處一定要寫 babel  -->
     <script type="text/babel">
-      // 1. create functional component
-      function MyComponent() {
-        console.log(this); //此處 this 是 undefined，因為 bable use strict（嚴格模式）
-        return <h2>我是用函式定義的元件，適用於簡單元件的定義</h2>;
+      // 1. create class component（這裡的 render() 跟 ReactDOM 裡的 render() 沒有關係）
+      class MyComponent extends React.Component {
+        render() {
+          // 1. render() 是放在 MyComponent 的原型對象上，供 instance（實例）使用。
+          // 2. render() 中的 this 是 MyComponent 的 instance 對象。或稱 MyComponent 元件實例對象。
+          console.log("render()中的this:", this);
+          return <h2>我是用 class 定義的元件（適用於『複雜元件』的定義）</h2>;
+        }
       }
       // 2. render component to html
       ReactDOM.render(<MyComponent />, document.getElementById("test"));
       /*
         執行了 ReactDOM.render(<MyComponent />...後，發生了什麼事？
-        1. React解析 Component 標籤，找到了 MyComponent 元件。
-        2. 發現元件使用函式定義後，隨即調用該函式，將返回的虛擬 DOM 轉為真實 DOM，呈現在頁面中。
+        1. React 解析元件標籤，找到了 MyComponent 元件。
+        2. 發現元件使用 class 定義後，即 new 一個該 class 的 instance，透過該 instance，呼叫原型上 render() 方法。
+        3. 將 render() return 的虛擬 DOM 為真實 DOM，呈現在頁面中。
       */
 
       /* jsx語法規則：
