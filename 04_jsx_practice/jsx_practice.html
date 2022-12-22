@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hello_react</title>
+  </head>
+  <body>
+    <!-- 準備容器，一定要記得寫容器 -->
+    <div id="test"></div>
+    <!-- 按順序引入 React 核心程式 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入 ReactDOM 用於支援 react 操作 DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <!-- 引入 babel 用於將 jsx 轉為 js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- 此處一定要寫 babel  -->
+    <script type="text/babel">
+      // 模擬數據
+      /* 一定要區分【js語句】與【js表達式】
+					1. 表達式：一個表達式會產生一個值，可以放在任何一個需要值的地方
+										(1) a
+										(2) a + b
+										(3) demo(1)
+										(4) array.map()
+										(5) function test(){}
+					2. js語句：
+										(1) if(){}
+										(2) for(){}
+										(3) switch(){ case:xxxx }
+			*/
+      const data = ["Angular", "React", "Vue"];
+      // 1. create virtual DOM，此處一定不要用雙引號，因為不是字串
+      const VDOM = (
+        <div>
+          <h1>前端框架列表</h1>
+          <ul>
+            {data.map((item, index) => {
+              return <li key={index}>{item}</li>;
+            })}
+          </ul>
+        </div>
+      );
+      // 2. render virtual DOM to html
+      ReactDOM.render(VDOM, document.getElementById("test"));
+    </script>
+  </body>
+</html>
