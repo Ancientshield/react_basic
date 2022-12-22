@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>用jsx創建虛擬DOM</title>
+    <title>虛擬DOM與真實DOM</title>
   </head>
   <body>
     <!-- 準備容器，一定要記得寫容器 -->
     <div id="test"></div>
+    <div id="demo"></div>
     <!-- 按順序引入 React 核心程式 -->
     <script type="text/javascript" src="../js/react.development.js"></script>
     <!-- 引入 ReactDOM 用於支援 react 操作 DOM -->
@@ -30,6 +31,25 @@
       );
       // 2. render virtual DOM to html
       ReactDOM.render(VDOM, document.getElementById("test"));
+
+      // 3. 虛擬DOM是什麼
+      console.log("虛擬DOM", VDOM);
+      console.log(typeof VDOM);
+      console.log(VDOM instanceof Object);
+      /* 輸出
+        虛擬DOM Object
+        object
+        true
+      */
+      const TDOM = document.getElementById("demo");
+      console.log("真實DOM", TDOM);
+      // 可在此處加入 debugger; 觀察真實DOM，屬性太多
+      // 輸出 <div id="demo"></div>
+      /* 關於虛擬DOM：
+          1. 本質是Object
+          2. 虛擬DOM屬性較少，比較小，真實DOM較大，因為虛擬DOM是React在用，無需真實DOM那麼多屬性
+          3. 虛擬DOM最終會被React轉化為DOM真實DOM，呈現在頁面上
+      */
     </script>
   </body>
 </html>
