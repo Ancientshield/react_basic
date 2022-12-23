@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>props基本使用</title>
+    <title>props的簡寫方式</title>
   </head>
   <body>
     <div id="test1"></div>
@@ -31,8 +31,22 @@
 
     <!-- 此處一定要寫 babel  -->
     <script type="text/babel">
-      // 創建元件
+      // 創建元件同時用 static 給 class 靜態屬性
       class Person extends React.Component {
+        static propTypes = {
+          name: PropTypes.string.isRequired,
+          sex: PropTypes.string,
+          age: PropTypes.number,
+          speak: PropTypes.func,
+        };
+
+        static defaultProps = {
+          sex: "other",
+          age: 18,
+        };
+
+        // state = {} 初始化 state 狀態
+
         render() {
           console.log(this);
           const { name, sex, age } = this.props;
@@ -47,20 +61,6 @@
         }
       }
 
-      // propTypes PropTypes 第一個 p 小寫是類別方法，第二個 P 大寫是引入 prop-types.js
-      // 限制元件傳入的屬性、型別、是否必填，function 為 JS 專用字，故函式檢查為 func
-      Person.propTypes = {
-        name: PropTypes.string.isRequired,
-        sex: PropTypes.string,
-        age: PropTypes.number,
-        speak: PropTypes.func,
-      };
-
-      // 設定元件屬性的預設值
-      Person.defaultProps = {
-        sex: "other",
-        age: 18,
-      };
       function speak() {
         console.log("我說話了");
       }
