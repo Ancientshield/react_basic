@@ -22,15 +22,21 @@
     <!-- 此處一定要寫 babel  -->
     <script type="text/babel">
       class Weather extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { isHot: false, wind: "微風" };
-          this.changeWeather = this.changeWeather.bind(this);
-        }
-        changeWeather() {
+        // constructor(props) {
+        //   super(props);
+        // this.state = { isHot: false, wind: "微風" };
+        // this.changeWeather = this.changeWeather.bind(this);
+        // }
+
+        // 1. 初始化狀態
+        state = { isHot: false, wind: "微風" };
+        // changeWeather() {
+
+        // 2. 用賦值語法＋箭頭函式自定義方法
+        changeWeather = () => {
           const isHot = this.state.isHot;
           this.setState({ isHot: !isHot });
-        }
+        };
         render() {
           const { isHot, wind } = this.state;
           return (
