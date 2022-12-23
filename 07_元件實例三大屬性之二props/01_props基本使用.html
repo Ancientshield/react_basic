@@ -4,16 +4,46 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hello_react</title>
+    <title>props基本使用</title>
   </head>
   <body>
-    <div id="test"></div>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
     <script type="text/javascript" src="../js/react.development.js"></script>
     <script
       type="text/javascript"
       src="../js/react-dom.development.js"
     ></script>
     <script type="text/javascript" src="../js/babel.min.js"></script>
-    <script type="text/babel"></script>
+    <script type="text/babel">
+      // 創建元件
+      class Person extends React.Component {
+        render() {
+          console.log(this);
+          const { name, sex, age } = this.props;
+          return (
+            <ul>
+              <li>name: {name}</li>
+              <li>sex: {sex}</li>
+              <li>age: {age}</li>
+            </ul>
+          );
+        }
+      }
+      // 渲染頁面
+      ReactDOM.render(
+        <Person name="Marry" sex="female" age="18" />,
+        document.getElementById("test1")
+      );
+      ReactDOM.render(
+        <Person name="Jack" sex="male" age="20" />,
+        document.getElementById("test2")
+      );
+      ReactDOM.render(
+        <Person name="Joe" sex="female" age="22" />,
+        document.getElementById("test3")
+      );
+    </script>
   </body>
 </html>
