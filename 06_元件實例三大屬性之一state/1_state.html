@@ -27,15 +27,22 @@
         // constructor 呼叫了幾次？一次。
         constructor(props) {
           super(props);
+          // console.log(this);
           this.state = { isHot: false, wind: "微風" };
+
+          /*
+            https://youtu.be/DUrLkxsihO4?t=339 複習
+            由右往左讀：將 Weather 實例上的 changeWeather 綁定到 constructor 自定義的 changeWeather 上
+            左邊的 changeWeather 目的是綁定 onClick 呼叫的函式名，右邊的 changeWeather 是 Weather 實例上的 changeWeather()
+          */
           this.changeWeather = this.changeWeather.bind(this);
         }
         // changeWeather 呼叫了幾次？n次。n是狀態更新的次數。點n次，呼叫n次。
         changeWeather() {
           // changeWather 放在 Weather 的原型物件上，供實例使用
           // 通過 Weather 實例呼叫 changeWeather 時，changeWeather 中的 this 就是 Weather 的實例
-          // 由於 changeWeather 是 onClick 呼叫的，不是實例呼叫，而是直接呼叫
-          // 且 class 中默認開啟 strick mode， 所以 changeWeather 中的 this 為 undefined
+          // changeWeather 是 onClick 呼叫的，不是實例呼叫，而是直接呼叫
+          // 類別中默認開啟 strick mode， 所以 changeWeather 中的 this 為 undefined
 
           // 得到原 isHot 值
           const isHot = this.state.isHot;

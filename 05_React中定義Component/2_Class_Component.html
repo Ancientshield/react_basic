@@ -24,7 +24,7 @@
       // 1. create class component（這裡的 render() 跟 ReactDOM 裡的 render() 沒有關係）
       class MyComponent extends React.Component {
         render() {
-          // 1. render() 是放在 MyComponent 的原型物件上，供 instance（實例）使用。
+          // 1. render() 是放在 MyComponent 的原型類別上，供 instance（實例）使用。
           // 2. render() 中的 this 是 MyComponent 的 instance 物件。或稱 MyComponent 是元件實例物件。
           console.log("render()中的this:", this);
           return <h2>我是用 class 定義的元件（適用於『複雜元件』的定義）</h2>;
