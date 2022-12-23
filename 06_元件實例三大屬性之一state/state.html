@@ -24,11 +24,32 @@
       // 1. 創建元件
       class Weather extends React.Component {
         // 2. 為了改變 state，初始化元件狀態
+        // constructor 呼叫了幾次？一次。
         constructor(props) {
           super(props);
-
-          this.state = { isHot: false };
+          this.state = { isHot: false, wind: "微風" };
+          this.changeWeather = this.changeWeather.bind(this);
         }
+        // changeWeather 呼叫了幾次？n次。n是狀態更新的次數。點n次，呼叫n次。  ㄎ
+        changeWeather() {
+          // changeWather 放在 Weather 的原型對象上，供實例使用
+          // 通過 Weather 實例呼叫 changeWeather 時，changeWeather 中的 this 就是 Weather 的實例
+          // 由於 changeWeather 是 onClick 呼叫的，不是實例呼叫，而是直接呼叫
+          // 且 class 中默認開啟 strick mode， 所以 changeWeather 中的 this 為 undefined
+
+          // 得到原 isHot 值
+          const isHot = this.state.isHot;
+          /* 【嚴重注意！】狀態不可直接更改（下面這行就是直接更改），要借助 React 內置的 API */
+          // this.state.isHot = !isHot; /* 這是錯誤的寫法 */
+
+          /* 【嚴重注意！】狀態必須借助 React __proto__ 的 setState 進行更新，且更新是一種合併，不是替換 */
+          this.setState({ isHot: !isHot });
+
+          // console.log(isHot);
+          // console.log(this);
+          // console.log("被點擊");
+        }
+        // render 了幾次？1+n次。第一次是初始化，n是狀態更新的次數。
         render() {
           /*
           尚未於 constructor 中指定 this.state 的值時，預設為 null
@@ -36,11 +57,22 @@
           debugger;
           */
           /* 原本寫法
-          return <h1>今天天氣很{ this.state.isHot ? "炎熱" : "涼爽"}</h1>; 
+          return <h1>今天天氣很{ this.state.isHot ? "炎熱" : "涼爽"}</h1>;
           */
           /* 解構賦值 */
-          const { isHot } = this.state;
-          return <h1>今天天氣很{isHot ? "炎熱" : "涼爽"}</h1>;
+          const { isHot, wind } = this.state;
+
+          // React 中會將 onclick 封裝為 onClick、onBlur，所以要大寫
+          // 不要呼叫函數 demo()，只要指定 function 名稱即可
+          // return (
+          //   <h1 onClick={demo}>
+          //     今天天氣很{isHot ? "炎熱" : "涼爽"}
+          //   </h1>
+          return (
+            <h1 onClick={this.changeWeather}>
+              今天天氣很{isHot ? "炎熱" : "涼爽"}，{wind}
+            </h1>
+          );
         }
       }
       // render component to html
