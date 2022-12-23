@@ -32,7 +32,7 @@
         }
         // changeWeather 呼叫了幾次？n次。n是狀態更新的次數。點n次，呼叫n次。
         changeWeather() {
-          // changeWather 放在 Weather 的原型對象上，供實例使用
+          // changeWather 放在 Weather 的原型物件上，供實例使用
           // 通過 Weather 實例呼叫 changeWeather 時，changeWeather 中的 this 就是 Weather 的實例
           // 由於 changeWeather 是 onClick 呼叫的，不是實例呼叫，而是直接呼叫
           // 且 class 中默認開啟 strick mode， 所以 changeWeather 中的 this 為 undefined

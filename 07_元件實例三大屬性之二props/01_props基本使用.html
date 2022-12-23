@@ -40,10 +40,21 @@
         <Person name="Jack" sex="male" age="20" />,
         document.getElementById("test2")
       );
+      // ReactDOM.render(
+      //   <Person name="Joe" sex="female" age="22" />,
+      //   document.getElementById("test3")
+      // );
+
+      // 模擬傳入數據
+      const p = { name: "Joe", sex: "female", age: "22" };
+      /*
       ReactDOM.render(
-        <Person name="Joe" sex="female" age="22" />,
+        <Person name={p.name} age={p.age} sex={p.sex} />,
         document.getElementById("test3")
       );
+      */
+      // 上面寫法的語法糖
+      ReactDOM.render(<Person {...p} />, document.getElementById("test3"));
     </script>
   </body>
 </html>
