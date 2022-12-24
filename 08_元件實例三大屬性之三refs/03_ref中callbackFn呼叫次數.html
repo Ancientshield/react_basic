@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>refs</title>
+    <title>ref中callback funcion次數</title>
   </head>
   <body>
     <!-- 準備容器，一定要記得寫容器 -->
@@ -29,40 +29,41 @@
     <script type="text/babel">
       // create component
       class Demo extends React.Component {
-        showData1 = () => {
-          // const { input1 } = this.refs;
+        showInfo = () => {
           const { input1 } = this;
           alert(input1.value);
         };
-        showData2 = () => {
-          // const { input2 } = this.refs;
-          const { input2 } = this;
-          alert(input2.value);
+
+        state = { isHot: false };
+
+        changeWeather = () => {
+          // 獲取原來的狀態，解構賦值，從 state 中拿出 isHot 放入左邊
+          const { isHot } = this.state;
+          // 更新狀態，只能用 React 的方法 setState
+          this.setState({ isHot: !isHot });
         };
 
         render() {
+          const { isHot } = this.state;
           return (
             <div>
+              <h2>今天天氣很{isHot ? "炎熱" : "涼爽"}</h2>
               <input
-                ref={(currentNode) => (this.input1 = currentNode)}
+                ref={(currentNode) => {
+                  this.input1 = currentNode;
+                  console.log("@", currentNode);
+                }}
                 type="text"
-                placeholder="點擊按鈕提示資料"
               />
-              &nbsp;
-              <button onClick={this.showData1}>
-                click me alert left data!
-              </button>
-              &nbsp;
-              <input
-                onBlur={this.showData2}
-                ref={(currentNode) => (this.input2 = currentNode)}
-                type="text"
-                placeholder="失去焦點提示資料"
-              />
+              <br />
+              <br />
+              <button onClick={this.showInfo}>點我提示輸入的資料</button>&nbsp;
+              <button onClick={this.changeWeather}>點我切換天氣</button>
             </div>
           );
         }
       }
+
       // render component
       ReactDOM.render(<Demo />, document.getElementById("test"));
     </script>
