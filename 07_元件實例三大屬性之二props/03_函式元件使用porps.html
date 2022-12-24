@@ -41,7 +41,7 @@
           </ul>
         );
       }
-      // 不是類別 instance 怎麼要求、限制、預設屬性呢？一樣是呼叫 propTypes
+      // 不是類別 instance 怎麼要求、限制、預設屬性呢？一樣是自定義 React 要求的 propTypes 後呼叫 PropTypes
       Person.propTypes = {
         name: PropTypes.string.isRequired,
         sex: PropTypes.string,

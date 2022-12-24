@@ -34,11 +34,11 @@
       // 創建元件同時用 static 給 class 靜態屬性
       class Person extends React.Component {
         // 構造器寫不寫，取決於是否希望在構造器中訪問 this.props
-        // 基本上，類別中的 constructor 在開發時，能不寫就不寫
+        // 【基本上，類別中的 constructor 在正式開發環境中，能不寫就不寫！！！】
         constructor(props) {
           super(props);
         }
-        // 可以用 static 簡寫，在類別加入屬性也可進行限制
+        // 可以用 static 簡寫，在類別加入 propTypes 屬性也可進行限制
         static propTypes = {
           name: PropTypes.string.isRequired,
           sex: PropTypes.string,
