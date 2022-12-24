@@ -43,18 +43,18 @@
           this.setState({ isHot: !isHot });
         };
 
+        saveInput = (currentNode) => {
+          this.input1 = currentNode;
+          console.log("@", currentNode);
+        };
+
         render() {
           const { isHot } = this.state;
           return (
             <div>
               <h2>今天天氣很{isHot ? "炎熱" : "涼爽"}</h2>
-              <input
-                ref={(currentNode) => {
-                  this.input1 = currentNode;
-                  console.log("@", currentNode);
-                }}
-                type="text"
-              />
+              {/* <input ref={ c => { this.input1 = c; console.log("@", c);}} type="text" /> 會有null、c，註掉 */}
+              <input ref={this.saveInput} type="text" />
               <br />
               <br />
               <button onClick={this.showInfo}>點我提示輸入的資料</button>&nbsp;
