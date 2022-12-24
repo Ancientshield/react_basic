@@ -33,11 +33,16 @@
     <script type="text/babel">
       // 創建元件同時用 static 給 class 靜態屬性
       class Person extends React.Component {
+        // 構造器寫不寫，取決於是否希望在構造器中訪問 this.props
+        // 基本上，類別中的 constructor 在開發時，能不寫就不寫
+        constructor(props) {
+          super(props);
+        }
+        // 可以用 static 簡寫，在類別加入屬性也可進行限制
         static propTypes = {
           name: PropTypes.string.isRequired,
           sex: PropTypes.string,
           age: PropTypes.number,
-          speak: PropTypes.func,
         };
 
         static defaultProps = {
@@ -45,7 +50,7 @@
           age: 18,
         };
 
-        // state = {} 初始化 state 狀態
+        state = {}; // 初始化 state 狀態
 
         render() {
           console.log(this);
@@ -61,34 +66,11 @@
         }
       }
 
-      function speak() {
-        console.log("我說話了");
-      }
-
       // 渲染頁面
       ReactDOM.render(
-        <Person name="Marry" age={19} />,
+        <Person name="Marry" />,
         document.getElementById("test1")
       );
-      ReactDOM.render(
-        <Person name="Jack" sex="male" age={20} speak={speak} />,
-        document.getElementById("test2")
-      );
-      /*
-      ReactDOM.render(
-        <Person name="Joe" sex="female" age="22" />,
-        document.getElementById("test3")
-      );
-      */
-
-      // 模擬傳入數據
-      const p = { name: "Joe", sex: "female", age: 22 };
-      /* ReactDOM.render(
-        <Person name={p.name} age={p.age} sex={p.sex} />,
-        document.getElementById("test3")
-      ); */
-      // 下面寫法為上面註解內的語法糖
-      ReactDOM.render(<Person {...p} />, document.getElementById("test3"));
     </script>
   </body>
 </html>

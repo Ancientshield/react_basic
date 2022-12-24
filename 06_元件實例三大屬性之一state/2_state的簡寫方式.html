@@ -22,17 +22,21 @@
     <!-- 此處一定要寫 babel  -->
     <script type="text/babel">
       class Weather extends React.Component {
-        // constructor(props) {
-        //   super(props);
-        // this.state = { isHot: false, wind: "微風" };
-        // this.changeWeather = this.changeWeather.bind(this);
-        // }
+        /*
+        // 是否要 constructor 接收 props 並傳遞給 super，取決於是否需要在 constructor 中訪問 this.props
+        // 及其少用的場景，所以在真實開發中，幾乎不會使用 constructor
+        constructor(props) {
+          super(props);
+          this.state = { isHot: false, wind: "微風" };
+          this.changeWeather = this.changeWeather.bind(this);
+         }
+        */
 
-        // 1. 初始化狀態
+        // 1. 初始化狀態簡寫，不用寫在 constructor 內
         state = { isHot: false, wind: "微風" };
         // changeWeather() {
 
-        // 2. 用賦值語句＋箭頭函式自定義方法
+        // 2. 用賦值語句＋箭頭函式自定義方法簡寫
         changeWeather = () => {
           const isHot = this.state.isHot;
           this.setState({ isHot: !isHot });
