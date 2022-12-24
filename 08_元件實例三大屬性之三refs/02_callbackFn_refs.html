@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>refs</title>
+  </head>
+  <body>
+    <!-- 準備容器，一定要記得寫容器 -->
+    <div id="test"></div>
+
+    <!-- 按順序引入 React 核心程式 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+
+    <!-- 引入 ReactDOM 用於支援 react 操作 DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+
+    <!-- 引入 babel 用於將 jsx 轉為 js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- 引入 prop-type.js 用於對元件標籤屬性(property)進行限制，Global 多了 PropTypes -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <!-- 此處一定要寫 babel  -->
+    <script type="text/babel">
+      // create component
+      class Demo extends React.Component {
+        showData1 = () => {
+          // const { input1 } = this.refs;
+          const { input1 } = this;
+          alert(input1.value);
+        };
+        showData2 = () => {
+          // const { input2 } = this.refs;
+          const { input2 } = this;
+          alert(input2.value);
+        };
+
+        render() {
+          return (
+            <div>
+              <input
+                ref={(currentNode) => (this.input1 = currentNode)}
+                type="text"
+                placeholder="點擊按鈕提示資料"
+              />
+              &nbsp;
+              <button onClick={this.showData1}>
+                click me alert left data!
+              </button>
+              &nbsp;
+              <input
+                onBlur={this.showData2}
+                ref={(currentNode) => (this.input2 = currentNode)}
+                type="text"
+                placeholder="失去焦點提示資料"
+              />
+            </div>
+          );
+        }
+      }
+      // render component
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
