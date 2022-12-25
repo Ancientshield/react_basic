@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curry Function</title>
+  </head>
+  <body>
+    <!-- 準備容器，一定要記得寫容器 -->
+    <div id="test"></div>
+
+    <!-- 按順序引入 React 核心程式 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+
+    <!-- 引入 ReactDOM 用於支援 react 操作 DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+
+    <!-- 引入 babel 用於將 jsx 轉為 js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- 引入 prop-type.js 用於對元件標籤屬性(property)進行限制，Global 多了 PropTypes -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <!-- 此處一定要寫 babel  -->
+    <script type="text/babel">
+      // 建立元件
+      class Login extends React.Component {
+        handleSubmit = () => {
+          event.preventDefault();
+          const { username, password } = this.state;
+          alert(`使用者名稱：${username}，密碼：${password}`);
+        };
+
+        state = {
+          username: "",
+          password: "",
+        };
+
+        formdata = (e) => {
+          this.setState({ [e.target.name]: e.target.value });
+        };
+
+        render() {
+          return (
+            <form action="http://www.atguigu.com" onSubmit={this.handleSubmit}>
+              使用者：
+              <input onChange={this.formdata} type="text" name="username" />
+              &nbsp;密碼：
+              <input onChange={this.formdata} type="password" name="password" />
+              &nbsp;
+              <button>登入</button>
+            </form>
+          );
+        }
+      }
+      // render component
+      ReactDOM.render(<Login />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
