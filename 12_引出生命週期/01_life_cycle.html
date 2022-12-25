@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life Cycle</title>
+  </head>
+  <body>
+    <!-- 準備容器，一定要記得寫容器 -->
+    <div id="test"></div>
+
+    <!-- 按順序引入 React 核心程式 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+
+    <!-- 引入 ReactDOM 用於支援 react 操作 DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+
+    <!-- 引入 babel 用於將 jsx 轉為 js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- 引入 prop-type.js 用於對元件標籤屬性(property)進行限制，Global 多了 PropTypes -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <!-- 此處一定要寫 babel  -->
+    <script type="text/babel">
+      // 創建元件，示範【生命週期 Callback Function】<=> 生命週期鉤子函數 <=> 生命週期函數 <=> 生命週期鉤子
+      class Life extends React.Component {
+        // 把 inline style 的狀態放到 state 裏面
+        state = { opacity: 1 };
+
+        death = () => {
+          // unmount component 卸載元件
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+        };
+
+        // componentDidMount 呼叫時機：元件掛載頁面完畢之後（只呼叫並掛載一次）
+        componentDidMount() {
+          this.timer = setInterval(() => {
+            // 獲得原本的 state
+            let { opacity } = this.state;
+            // 減0.1透明度
+            opacity -= 0.1;
+            // 防止透明度變負數
+            if (opacity <= 0) opacity = 1;
+            // 設定新的透明度，更新狀態
+            this.setState({ opacity });
+          }, 200);
+        }
+
+        // componentWillUnmount 呼叫時機：元件將要卸載時
+        componentWillUnmount() {
+          // 清除定時器
+          clearInterval(this.timer);
+        }
+
+        // render 呼叫的時機：1.頁面初始化渲染 2.狀態更新之後
+        render() {
+          return (
+            <div>
+              <h2 style={{ opacity: this.state.opacity }}>
+                React學不會怎麼辦？
+              </h2>
+              <button onClick={this.death}>不活了</button>
+            </div>
+          );
+        }
+      }
+      // 渲染元件
+      ReactDOM.render(<Life />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
