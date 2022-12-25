@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>非受控元件</title>
+    <title>受控元件</title>
   </head>
   <body>
     <!-- 準備容器，一定要記得寫容器 -->
@@ -35,23 +35,37 @@
           在這裡是阻止表單提交，頁面不會刷新，但值仍然傳遞了
           */
           event.preventDefault();
-          const { username, password } = this;
-          // 現用現取
-          alert(`使用者名稱：${username.value}，密碼：${password.value}`);
+          // const { username, password } = this;
+          const { username, password } = this.state;
+          // alert(`使用者名稱：${username.value}，密碼：${password.value}`);
+          alert(`使用者名稱：${username}，密碼：${password}`);
+        };
+
+        // 初始化狀態後，再往裡面塞東西比較好
+        state = {
+          username: "",
+          password: "",
+        };
+
+        // 雖然可以不寫 event 但影片有寫，寫一下比較保險
+        // 保存使用者名稱到 state
+        saveUsername = (event) => {
+          this.setState({ username: event.target.value });
+        };
+
+        // 保存密碼到 state
+        savePassword = (event) => {
+          this.setState({ password: event.target.value });
         };
 
         render() {
           return (
             <form action="http://www.atguigu.com" onSubmit={this.handleSubmit}>
               使用者：
-              <input
-                ref={(c) => (this.username = c)}
-                type="text"
-                name="username"
-              />
+              <input onChange={this.saveUsername} type="text" name="username" />
               &nbsp;密碼：
               <input
-                ref={(c) => (this.password = c)}
+                onChange={this.savePassword}
                 type="password"
                 name="password"
               />
