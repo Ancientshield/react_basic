@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <!-- 準備容器，一定要記得寫容器 -->
+    <div id="test"></div>
+
+    <!-- 按順序引入 React 核心程式 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+
+    <!-- 引入 ReactDOM 用於支援 react 操作 DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+
+    <!-- 引入 babel 用於將 jsx 轉為 js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- 引入 prop-type.js 用於對元件標籤屬性(property)進行限制，Global 多了 PropTypes -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <!-- 此處一定要寫 babel  -->
+    <script type="text/babel">
+      // create component
+      class Demo extends React.Component {
+        /*
+          React.createRef()，呼叫後可建立一個容器（例：myRef ）
+          容器可以儲存被 ref 標記的節點
+          容器是專人專用
+          透過 onX... 屬性指定事件處理函數（注意大小寫）
+          React 使用的是自定義事件，而不是使用原生 DOM 事件，目的是為了相容性
+          React 中的事件是透過事件委託方式處理的（委託給元件最外層的元素），目的是為了更高的效能
+          可以透過 event.target 得到發生事件的 DOM 元素物件
+        */
+        myRef = React.createRef();
+        showData1 = () => {
+          // console.log(this.myRef.current.value);
+          alert(this.myRef.current.value);
+        };
+
+        // 不要 過度使用 ref。如何避免？【發生事件的元素，正好是要操作的元素】例如此例中的 input
+        // event 事件會被自動傳入，不用帶參數，寫 event 只是為了示範，可以空白
+        // myRef2 = React.createRef();
+        showData2 = (event) => {
+          alert(event.target.value);
+        };
+
+        render() {
+          return (
+            <div>
+              <input
+                ref={this.myRef}
+                type="text"
+                placeholder="點擊按鈕提示資料"
+              />
+              &nbsp;
+              <button onClick={this.showData1}>
+                click me alert left data!
+              </button>
+              <input
+                onBlur={this.showData2}
+                type="text"
+                placeholder="失去焦點提示資料"
+              />
+            </div>
+          );
+        }
+      }
+      // render component
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
