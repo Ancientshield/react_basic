@@ -45,9 +45,10 @@
         };
 
         // 不要 過度使用 ref。如何避免？【發生事件的元素，正好是要操作的元素】例如此例中的 input
-        // event 事件會被自動傳入，不用帶參數，寫 event 只是為了示範，可以空白
+        // 這裡的 event 事件會被自動傳入，不用帶參數，推測是 React 做的（根據上面註釋事件委託方式）
         // myRef2 = React.createRef();
-        showData2 = (event) => {
+        // showData2 = (event) => {
+        showData2 = () => {
           alert(event.target.value);
         };
 
